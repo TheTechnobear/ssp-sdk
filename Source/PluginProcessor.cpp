@@ -7,6 +7,82 @@
 #include "PluginEditor.h"
 #include "Percussa.h" 
 
+
+const char* percussaParamsName [Percussa::sspLast-Percussa::sspFirst] = {
+    "sspEnc1",
+    "sspEnc2",
+    "sspEnc3",
+    "sspEnc4",
+    "sspEncSw1",
+    "sspEncSw2",
+    "sspEncSw3",
+    "sspEncSw4",
+    "sspSw1",
+    "sspSw2",
+    "sspSw3",
+    "sspSw4",
+    "sspSw5",
+    "sspSw6",
+    "sspSw7",
+    "sspSw8",
+    "sspSwLeft",
+    "sspSwRight",
+    "sspSwUp",
+    "sspSwDown",
+    "sspSwShiftL",
+    "sspSwShiftR",
+    "sspOutEn1", 
+    "sspOutEn2", 
+    "sspOutEn3", 
+    "sspOutEn4", 
+    "sspOutEn5", 
+    "sspOutEn6", 
+    "sspOutEn7", 
+    "sspOutEn8", 
+    "sspOutEn9", 
+    "sspOutEn10", 
+    "sspOutEn11", 
+    "sspOutEn12", 
+    "sspOutEn13", 
+    "sspOutEn14", 
+    "sspOutEn15", 
+    "sspOutEn16", 
+    "sspOutEn17", 
+    "sspOutEn18", 
+    "sspOutEn19", 
+    "sspOutEn20", 
+    "sspOutEn21", 
+    "sspOutEn22", 
+    "sspOutEn23", 
+    "sspOutEn24", 
+    "sspInEn1", 
+    "sspInEn2", 
+    "sspInEn3", 
+    "sspInEn4", 
+    "sspInEn5", 
+    "sspInEn6", 
+    "sspInEn7", 
+    "sspInEn8", 
+    "sspInEn9", 
+    "sspInEn10", 
+    "sspInEn11", 
+    "sspInEn12", 
+    "sspInEn13", 
+    "sspInEn14", 
+    "sspInEn15", 
+    "sspInEn16", 
+    "sspInEn17", 
+    "sspInEn18", 
+    "sspInEn19", 
+    "sspInEn20", 
+    "sspInEn21", 
+    "sspInEn22", 
+    "sspInEn23", 
+    "sspInEn24" 
+};
+
+
+
 QVCA::QVCA(): 
 	inputNames  ({ "In1",  "In2",  "In3",  "In4",  "In5",  "In6",  "In7",  "In8"  }),  
 	outputNames ({ "Out1", "Out2", "Out3", "Out4", "Out5", "Out6", "Out7", "Out8" })   
@@ -64,6 +140,8 @@ void QVCA::setParameter (int index, float newValue)
 
 	if (index < Percussa::sspFirst) return; 
 	if (index >= Percussa::sspLast) return; 
+
+    Logger::writeToLog(getParameterName(index) + ":" + String(newValue));
 
 	switch(index) { 
 		case Percussa::sspEnc1:
@@ -158,12 +236,14 @@ void QVCA::setParameter (int index, float newValue)
 
 const String QVCA::getParameterName (int index)
 {
-    return String();
+	if (index < Percussa::sspFirst || index >= Percussa::sspLast) return "Param:"+String(index); 
+    return percussaParamsName[index-Percussa::sspFirst];
 }
 
 const String QVCA::getParameterText (int index)
 {
-    return String();
+	if (index < Percussa::sspFirst || index >= Percussa::sspLast) return "Param:"+String(index); 
+    return percussaParamsName[index-Percussa::sspFirst];
 }
 
 const String QVCA::getInputChannelName (int channelIndex) const
