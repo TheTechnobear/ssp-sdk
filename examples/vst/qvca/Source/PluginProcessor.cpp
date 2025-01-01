@@ -21,7 +21,7 @@ PluginProcessor::~PluginProcessor() {
 
 const String PluginProcessor::getInputBusName(int channelIndex) {
     static String inputNames[O_MAX] = {
-        "In1", "In2", "In3", "In4", "In5", "In6", "In7", "In8"};
+        "In1", "Gain1", "In2", "Gain1", "In3", "Gain3", "In4", "Gain4"};
     if (channelIndex < I_MAX) { return inputNames[channelIndex]; }
     return "ZZIn-" + String(channelIndex);
 }
@@ -29,7 +29,7 @@ const String PluginProcessor::getInputBusName(int channelIndex) {
 
 const String PluginProcessor::getOutputBusName(int channelIndex) {
     static String outputNames[O_MAX] = {
-        "Out1", "Out2", "Out3", "Out4", "Out5", "Out6", "Out7", "Out8"};
+        "+Out1", "-Out1", "+Out2", "-Out2", "+Out3", "-Out3", "+Out4", "-Out4"};
     if (channelIndex < O_MAX) { return outputNames[channelIndex]; }
     return "ZZOut-" + String(channelIndex);
 }
